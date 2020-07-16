@@ -37,6 +37,7 @@ public class ResumePlugin implements Plugin<Project> {
 		// Register task to build the latext document
 		final PdfLatexDocument document = project.tasks.create('document', PdfLatexDocument)
 		document.group = "Build"
+		document.dependsOn(skillCloud, markdown)
 
 		final Task build = project.tasks.getByName('build')
 		build.dependsOn(markdown, skillCloud, document)

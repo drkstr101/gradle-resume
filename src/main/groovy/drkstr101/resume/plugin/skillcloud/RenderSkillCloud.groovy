@@ -78,10 +78,10 @@ class RenderSkillCloud extends DefaultTask {
 	RenderSkillCloud(ObjectFactory objectFactory, ProviderFactory providerFactory, ProjectLayout layout) {
 
 		imageOutputFile = objectFactory.fileProperty()
-		imageOutputFile.convention(layout.buildDirectory.file('skillcloud/skillcloud.png'))
+		imageOutputFile.convention(layout.buildDirectory.file('document/default/skillcloud.png'))
 
 		textOutputFile = objectFactory.fileProperty()
-		textOutputFile.convention(layout.buildDirectory.file('skillcloud/skills.txt'))
+		textOutputFile.convention(layout.buildDirectory.file('document/default/skills.txt'))
 
 		imageWidth = objectFactory.property(Integer)
 		imageWidth.convention(DEFAULT_IMAGE_WIDTH)
