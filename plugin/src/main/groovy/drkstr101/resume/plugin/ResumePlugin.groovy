@@ -9,7 +9,7 @@ import org.gradle.api.Task
 import org.gradle.api.plugins.BasePlugin
 
 import drkstr101.resume.plugin.document.PdfLatexDocument
-import drkstr101.resume.plugin.markdown.RenderMarkdown
+// import drkstr101.resume.plugin.markdown.RenderMarkdown
 import drkstr101.resume.plugin.skillcloud.RenderSkillCloud
 
 /**
@@ -25,9 +25,9 @@ public class ResumePlugin implements Plugin<Project> {
 		final ResumeExtension resume = project.extensions.create('resume', ResumeExtension)
 		
 		// Register task to render markdown content
-		final RenderMarkdown markdown = project.tasks.create('markdown', RenderMarkdown)
-		markdown.group = "Build"
-		markdown.resume = resume
+		// final RenderMarkdown markdown = project.tasks.create('markdown', RenderMarkdown)
+		// markdown.group = "Build"
+		// markdown.resume = resume
 
 		// Register task to generate Skill Cloud image
 		final RenderSkillCloud skillCloud = project.tasks.create('skillCloud', RenderSkillCloud)
@@ -37,9 +37,9 @@ public class ResumePlugin implements Plugin<Project> {
 		// Register task to build the latext document
 		final PdfLatexDocument document = project.tasks.create('document', PdfLatexDocument)
 		document.group = "Build"
-		document.dependsOn(skillCloud, markdown)
+		document.dependsOn(skillCloud/* , markdown */)
 
 		final Task build = project.tasks.getByName('build')
-		build.dependsOn(markdown, skillCloud, document)
+		build.dependsOn(/* markdown,  */skillCloud, document)
 	}
 }
