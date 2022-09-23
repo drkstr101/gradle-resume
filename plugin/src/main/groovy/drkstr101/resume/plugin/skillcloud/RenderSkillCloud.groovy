@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package drkstr101.resume.plugin.skillcloud
 
@@ -34,88 +34,86 @@ import drkstr101.resume.plugin.model.Skill
  */
 class RenderSkillCloud extends DefaultTask {
 
-	static String displayNameFor(Skill skill) {
-		return skill.label? skill.label :
-				skill.name.split('_').collect({ it.capitalize() }).join(" ")
-	}
-	
-	static List<String> collectCategories(Map<String, Skill> skillsByName) {
-		return skillsByName.values()
-				.stream()
-				.filter({ Skill skill -> skill.parent == null })
-				.collect { Skill skill -> skill.name }
-	}
+  static String displayNameFor(Skill skill) {
+    return skill.label ? skill.label :
+                skill.name.split('_').collect({ it.capitalize() }).join(' ')
+  }
 
-	static List<WordFrequency> toWordFrequencies(Resume resume, Map<String, Integer> skillPoints, List<String> categories) {
-		return skillPoints.collect([], { key, val ->
-			def skill = resume.skillsByName.get(key)
-			def index = categories.indexOf(skill.rootNode().name)
-			return new WordFrequency(displayNameFor(skill), val, index)
-		}).sort({ WordFrequency val -> val.frequency }).reverse()
-	}
+  static List<String> collectCategories(Map<String, Skill> skillsByName) {
+    return skillsByName.values()
+                .stream()
+                .filter({ Skill skill -> skill.parent == null })
+                .collect { Skill skill -> skill.name }
+  }
 
+  static List<WordFrequency> toWordFrequencies(Resume resume, Map<String, Integer> skillPoints, List<String> categories) {
+    return skillPoints.collect([], { key, val ->
+      def skill = resume.skillsByName.get(key)
+      def index = categories.indexOf(skill.rootNode().name)
+      return new WordFrequency(displayNameFor(skill), val, index)
+        }).sort({ WordFrequency val -> val.frequency }).reverse()
+    }
 
-	static final DEFAULT_IMAGE_WIDTH = 800
+  static final DEFAULT_IMAGE_WIDTH = 800
 
-	static final DEFAULT_IMAGE_HEIGHT = 600
+  static final DEFAULT_IMAGE_HEIGHT = 600
 
-	@Input final Property<Integer> imageWidth
+  @Input final Property<Integer> imageWidth
 
-	@Input final Property<Integer> imageHeight
+  @Input final Property<Integer> imageHeight
 
-	@Input final Provider<SkillPoints> skillPoints
+  @Input final Provider<SkillPoints> skillPoints
 
-	@OutputFile final RegularFileProperty imageOutputFile
+  @OutputFile final RegularFileProperty imageOutputFile
 
-	@OutputFile final RegularFileProperty textOutputFile
+  @OutputFile final RegularFileProperty textOutputFile
 
-	@Internal Provider<Resume> modelProvider
+  @Internal Provider<Resume> modelProvider
 
-	@Internal SkillPointCalculator _calculator
+  @Internal SkillPointCalculator _calculator
 
+    @Inject
+  RenderSkillCloud(ObjectFactory objectFactory, ProviderFactory providerFactory, ProjectLayout layout) {
+    imageOutputFile = objectFactory.fileProperty()
+    imageOutputFile.convention(layout.projectDirectory.file('template/altacv/skillcloud.png'))
 
-	@Inject
-	RenderSkillCloud(ObjectFactory objectFactory, ProviderFactory providerFactory, ProjectLayout layout) {
+    textOutputFile = objectFactory.fileProperty()
+    textOutputFile.convention(layout.projectDirectory.file('template/altacv/skills.txt'))
 
-		imageOutputFile = objectFactory.fileProperty()
-		imageOutputFile.convention(layout.buildDirectory.file('document/default/skillcloud.png'))
+    imageWidth = objectFactory.property(Integer)
+    imageWidth.convention(DEFAULT_IMAGE_WIDTH)
 
-		textOutputFile = objectFactory.fileProperty()
-		textOutputFile.convention(layout.buildDirectory.file('document/default/skills.txt'))
+    imageHeight = objectFactory.property(Integer)
+    imageHeight.convention(DEFAULT_IMAGE_HEIGHT)
 
-		imageWidth = objectFactory.property(Integer)
-		imageWidth.convention(DEFAULT_IMAGE_WIDTH)
+    skillPoints = providerFactory.provider {
+      if (_calculator == null) {
+        _calculator = new SkillPointCalculator(modelProvider.get()).calculate()
+      }
 
-		imageHeight = objectFactory.property(Integer)
-		imageHeight.convention(DEFAULT_IMAGE_HEIGHT)
+      return _calculator.skillPoints
+    }
+  }
 
-		skillPoints = providerFactory.provider {
-			if(_calculator == null) {
-				_calculator = new SkillPointCalculator(modelProvider.get()).calculate()
-			}
+    @TaskAction
+  void run() {
+    final Resume resume = modelProvider.get()
+    final Map<String, BigInteger> skillPoints = this.skillPoints.get()
+    final List<String> categories = collectCategories(resume.skillsByName)
+    final List<WordFrequency> wordFrequencies = toWordFrequencies(resume, skillPoints, categories)
 
-			return _calculator.skillPoints
-		}
-	}
+    final Dimension dimension = new Dimension(imageWidth.get(), imageHeight.get())
+    final ColorPalette colorPalette = new ColorPalette(EquidistantColorPalette.getColors(categories.size()))
+    final WordCloud wordCloud = WordCloudFactory.create(wordFrequencies, dimension, colorPalette)
 
-	@TaskAction
-	void run() {
-		final Resume resume = modelProvider.get()
-		final Map<String, BigInteger> skillPoints = this.skillPoints.get()
-		final List<String> categories = collectCategories(resume.skillsByName)
-		final List<WordFrequency> wordFrequencies = toWordFrequencies(resume, skillPoints, categories)
-		
-		final Dimension dimension = new Dimension(imageWidth.get(), imageHeight.get())
-		final ColorPalette colorPalette = new ColorPalette(EquidistantColorPalette.getColors(categories.size()))
-		final WordCloud wordCloud = WordCloudFactory.create(wordFrequencies, dimension, colorPalette)
+    textOutputFile.get().asFile.withWriter { Writer writer ->
+      wordFrequencies.each { writer.write("${it.frequency}: ${it.word}\n") }
+    }
 
-		textOutputFile.get().asFile.withWriter { Writer writer ->
-			wordFrequencies.each { writer.write("${it.frequency}: ${it.word}\n") }
-		}
+    // Generate skill cloud image
+    this.imageOutputFile.get().asFile.withOutputStream { os ->
+      wordCloud.writeToStreamAsPNG(os)
+    }
+  }
 
-		// Generate skill cloud image
-		this.imageOutputFile.get().asFile.withOutputStream { os ->
-			wordCloud.writeToStreamAsPNG(os)
-		}
-	}
-}
+  }
