@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'ivy-publish'
+}
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    implementation 'org.apache.logging.log4j:log4j-to-slf4j:2.9.1'
+    implementation 'org.slf4j:jul-to-slf4j:1.7.30'
+    implementation 'org.slf4j:log4j-over-slf4j:1.7.30'
+    implementation 'org.jsoup:jsoup:1.12.1'
+    implementation 'commons-io:commons-io:2.4'
+    implementation 'org.apache.commons:commons-lang3:3.4'
+    implementation 'com.github.davidmoten:rtree:0.8.6'
+    testImplementation 'junit:junit:4.12'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+publishing {
+    publications {
+        ivy(IvyPublication) { from components.java }
+    }
+
+    repositories {
+        ivy { url = uri(rootProject.file('build/artifacts')) }
+    }
+}

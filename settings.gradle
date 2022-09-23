@@ -10,6 +10,4 @@
 rootProject.name = 'gradle-resume'
 
 include ':kumo'
-include ':kumo:kumo-api'
-include ':kumo:kumo-core'
 include ':plugin'
