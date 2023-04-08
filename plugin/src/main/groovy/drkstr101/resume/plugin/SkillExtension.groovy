@@ -15,20 +15,20 @@ import org.gradle.api.tasks.Optional
  */
 class SkillExtension implements Named {
 
-	private final String name
+  private final String name
 
-	@Input
-	String getName() {
-		return name
-	}
+  @Input
+  String getName() {
+    return name
+  }
 
-	@Optional @Input String label
-	
-	@Nested final NamedDomainObjectContainer<SkillExtension> children
+  @Optional @Input String label
 
-	@Inject
-	SkillExtension(String name, ObjectFactory objectFactory) {
-		this.name = name
-		children = objectFactory.domainObjectContainer(SkillExtension)
-	}
+  @Nested final NamedDomainObjectContainer<SkillExtension> children
+
+  @Inject
+  SkillExtension(String name, ObjectFactory objectFactory) {
+    this.name = name
+    children = objectFactory.domainObjectContainer(SkillExtension)
+  }
 }

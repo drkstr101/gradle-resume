@@ -7,17 +7,19 @@ import java.util.List;
  */
 public class CompositeFilter extends Filter {
 
-    private final List<Filter> filters;
+  private final List<Filter> filters;
 
-    public CompositeFilter(final List<Filter> filters) {
-        this.filters = filters;
-    }
+  public CompositeFilter(final List<Filter> filters) {
+    this.filters = filters;
+  }
 
-    @Override
-    public boolean test(final String word) {
-        for (final Filter filter : filters) {
-            if (!filter.test(word)) { return false; }
-        }
-        return true;
+  @Override
+  public boolean test(final String word) {
+    for (final Filter filter : filters) {
+      if (!filter.test(word)) {
+        return false;
+      }
     }
+    return true;
+  }
 }

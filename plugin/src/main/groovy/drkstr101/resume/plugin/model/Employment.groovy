@@ -8,12 +8,12 @@ import groovy.transform.Canonical
  */
 @Canonical
 class Employment {
-	String name
-	String type
-	String title
-	Calendar startDate
-	Calendar endDate
-	String employer
-	String description
-	Collection<Accomplishment> accomplishments = []
+  String name
+  String type
+  String title
+  Calendar startDate
+  Calendar endDate
+  String employer
+  String description
+  Collection<Accomplishment> accomplishments = []
 }

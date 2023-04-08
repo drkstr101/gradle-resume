@@ -1,6 +1,5 @@
 package com.kennycason.kumo.nlp.filter;
 
-
 import java.util.function.Predicate;
 
 /**
@@ -8,20 +7,19 @@ import java.util.function.Predicate;
  */
 public abstract class Filter implements Predicate<String> {
 
-    @Override
-    public Predicate<String> and(final Predicate<? super String> other) {
-        throw new UnsupportedOperationException();
-    }
+  @Override
+  public Predicate<String> and(final Predicate<? super String> other) {
+    throw new UnsupportedOperationException();
+  }
 
-    @Override
-    public Predicate<String> negate() {
-        throw new UnsupportedOperationException();
-    }
+  @Override
+  public Predicate<String> negate() {
+    throw new UnsupportedOperationException();
+  }
 
-    @Override
-    public Predicate<String> or(final Predicate<? super String> other) {
-        throw new UnsupportedOperationException();
-    }
+  @Override
+  public Predicate<String> or(final Predicate<? super String> other) {
+    throw new UnsupportedOperationException();
+  }
 
 }
-

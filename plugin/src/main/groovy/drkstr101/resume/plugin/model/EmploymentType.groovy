@@ -5,8 +5,8 @@ package drkstr101.resume.plugin.model
  *
  */
 enum EmploymentType {
-	DirectW2,
-	Direct1099,
-	CorpToCorp,
-	Self
+  DirectW2,
+  Direct1099,
+  CorpToCorp,
+  Self
 }

@@ -5,17 +5,21 @@ package com.kennycason.kumo.exception;
  */
 public class KumoException extends RuntimeException {
 
-    public KumoException(final String message) {
-        super(message);
-    }
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
 
-    public KumoException(final Throwable cause) {
-        super(cause);
-    }
+  public KumoException(final String message) {
+    super(message);
+  }
 
-    public KumoException(final String message, final Throwable cause) {
-        super(message, cause);
-    }
+  public KumoException(final Throwable cause) {
+    super(cause);
+  }
+
+  public KumoException(final String message, final Throwable cause) {
+    super(message, cause);
+  }
 
 }
-

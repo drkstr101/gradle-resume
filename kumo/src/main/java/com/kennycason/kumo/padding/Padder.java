@@ -8,5 +8,5 @@ import com.kennycason.kumo.Word;
  * Add padding around words in the word cloud.
  */
 public interface Padder {
-    void pad(final Word word, final int padding);
+  void pad(final Word word, final int padding);
 }

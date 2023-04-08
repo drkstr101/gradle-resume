@@ -4,23 +4,23 @@
 package drkstr101.resume.plugin
 
 import org.gradle.testfixtures.ProjectBuilder
-import org.gradle.api.Project
+
 import spock.lang.Specification
 
 /**
  * A simple unit test for the 'drkstr101.resume.plugin.greeting' plugin.
  */
 public class ResumePluginTest extends Specification {
-    def "plugin registers tasks"() {
-        given:
-        def project = ProjectBuilder.builder().build()
+  def "plugin registers tasks"() {
+    given:
+    def project = ProjectBuilder.builder().build()
 
-        when:
-        project.plugins.apply("drkstr101.resume")
-		
-		then:
-        assert project.extensions.findByName("resume") != null
-		assert project.tasks.findByName("skillCloud") != null
-		// assert project.tasks.findByName("markdown") != null
-    }
+    when:
+    project.plugins.apply("drkstr101.resume")
+
+    then:
+    assert project.extensions.findByName("resume") != null
+    assert project.tasks.findByName("skillCloud") != null
+    // assert project.tasks.findByName("markdown") != null
+  }
 }

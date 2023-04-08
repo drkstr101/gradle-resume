@@ -7,26 +7,26 @@ import java.util.regex.Pattern;
  */
 public class CharacterStrippingNormalizer implements Normalizer {
 
-    private static final Pattern DEFAULT_PATTERN = Pattern.compile("\\.|:|;|\\(|\\)|\"|,|\\?|,|!|<|>|/");
+  private static final Pattern DEFAULT_PATTERN = Pattern.compile("\\.|:|;|\\(|\\)|\"|,|\\?|,|!|<|>|/");
 
-    private static final String DEFAULT_REPLACE_WITH = "";
+  private static final String DEFAULT_REPLACE_WITH = "";
 
-    private final Pattern replacePattern;
+  private final Pattern replacePattern;
 
-    private final String replaceWith;
+  private final String replaceWith;
 
-    public CharacterStrippingNormalizer() {
-        this(DEFAULT_PATTERN, DEFAULT_REPLACE_WITH);
-    }
+  public CharacterStrippingNormalizer() {
+    this(DEFAULT_PATTERN, DEFAULT_REPLACE_WITH);
+  }
 
-    public CharacterStrippingNormalizer(final Pattern replacePattern, final String replaceWith) {
-        this.replacePattern = replacePattern;
-        this.replaceWith = replaceWith;
-    }
+  public CharacterStrippingNormalizer(final Pattern replacePattern, final String replaceWith) {
+    this.replacePattern = replacePattern;
+    this.replaceWith = replaceWith;
+  }
 
-    @Override
-    public String apply(final String text) {
-        return replacePattern.matcher(text).replaceAll(replaceWith);
-    }
+  @Override
+  public String apply(final String text) {
+    return replacePattern.matcher(text).replaceAll(replaceWith);
+  }
 
 }

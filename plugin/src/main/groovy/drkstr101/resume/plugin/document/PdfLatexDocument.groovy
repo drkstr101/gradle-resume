@@ -23,53 +23,53 @@ import org.gradle.process.ExecOperations
  *
  */
 class PdfLatexDocument extends DefaultTask {
-	
-	@Internal final ExecOperations execOperations
-	
-	@Internal final FileSystemOperations fileSystemOperations
-	
-	@Input final Property<String> fileName
-	
-	@InputDirectory final DirectoryProperty inputDirectory
-	
-	@OutputDirectory final DirectoryProperty outputDirectory
-	
-	@Inject
-	PdfLatexDocument(ObjectFactory objectFactory, ProjectLayout layout, ExecOperations execOperations, FileSystemOperations fileSystemOperations) {
-		
-		this.execOperations = execOperations
-		this.fileSystemOperations = fileSystemOperations
-		
-		fileName = objectFactory.property(String)
-		fileName.convention("main.tex")
-		
-		inputDirectory = objectFactory.directoryProperty()
-		inputDirectory.convention(layout.projectDirectory.dir("template/default"))
-		
-		outputDirectory = objectFactory.directoryProperty()
-		outputDirectory.convention(layout.buildDirectory.dir("document/default"))
-	}
 
-	@TaskAction
-	protected void run() {
-		
-		// Copy template files into the output directory
-		fileSystemOperations.copy {
-			from inputDirectory
-			into outputDirectory
-		}
-		
-		// Run pdf latex
-		final String fileName = this.fileName.get()
-		final File outputDir = this.outputDirectory.get().asFile
-		
-		execOperations.exec {
-			executable = 'pdflatex'
-			workingDir = outputDir
-			args = [fileName]
-			
-			// squash non-error output
-			standardOutput = new ByteArrayOutputStream()
-		}
-	}
+  @Internal final ExecOperations execOperations
+
+  @Internal final FileSystemOperations fileSystemOperations
+
+  @Input final Property<String> fileName
+
+  @InputDirectory final DirectoryProperty inputDirectory
+
+  @OutputDirectory final DirectoryProperty outputDirectory
+
+  @Inject
+  PdfLatexDocument(ObjectFactory objectFactory, ProjectLayout layout, ExecOperations execOperations, FileSystemOperations fileSystemOperations) {
+
+    this.execOperations = execOperations
+    this.fileSystemOperations = fileSystemOperations
+
+    fileName = objectFactory.property(String)
+    fileName.convention("main.tex")
+
+    inputDirectory = objectFactory.directoryProperty()
+    inputDirectory.convention(layout.projectDirectory.dir("template/default"))
+
+    outputDirectory = objectFactory.directoryProperty()
+    outputDirectory.convention(layout.buildDirectory.dir("document/default"))
+  }
+
+  @TaskAction
+  protected void run() {
+
+    // Copy template files into the output directory
+    fileSystemOperations.copy {
+      from inputDirectory
+      into outputDirectory
+    }
+
+    // Run pdf latex
+    final String fileName = this.fileName.get()
+    final File outputDir = this.outputDirectory.get().asFile
+
+    execOperations.exec {
+      executable = 'pdflatex'
+      workingDir = outputDir
+      args = [fileName]
+
+      // squash non-error output
+      standardOutput = new ByteArrayOutputStream()
+    }
+  }
 }

@@ -5,14 +5,15 @@ import java.util.List;
 
 /**
  * Disables tokenization
- * 
+ *
  * @author &#64;wolfposd
  *
  */
 public class NoTokenizer implements WordTokenizer {
 
-    public List<String> tokenize(final String sentence) {
-        return Collections.singletonList(sentence);
-    }
+  @Override
+  public List<String> tokenize(final String sentence) {
+    return Collections.singletonList(sentence);
+  }
 
 }

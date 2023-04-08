@@ -12,26 +12,38 @@ import drkstr101.resume.plugin.model.EmploymentType
 /**
  * @author Aaron R Miller
  *
- */
-class EmploymentExtension implements Named {
+ */class EmploymentExtension implements Named {
 
-	private final String name
+  private final String name
 
-	@Input
-	String getName() {
-		return name
-	}
+  @Input
+  String getName() {
+    return name
+  }
 
-	@Input String type
-	@Optional @Input String title
-	@Optional @Input Calendar startDate
-	@Optional @Input Calendar endDate
-	@Optional @Input String employer
-	@Optional @Input String description
-	@Optional @Input Set<String> accomplishments
+  @Input
+  String type
+  @Optional
+  @Input
+  String title
+  @Optional
+  @Input
+  Calendar startDate
+  @Optional
+  @Input
+  Calendar endDate
+  @Optional
+  @Input
+  String employer
+  @Optional
+  @Input
+  String description
+  @Optional
+  @Input
+  Set<String> accomplishments
 
-	@Inject
-	EmploymentExtension(String name, ObjectFactory objectFactory) {
-		this.name = name
-	}
+  @Inject
+  EmploymentExtension( String name, ObjectFactory objectFactory) {
+    this.name=name
+  }
 }
