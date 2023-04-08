@@ -1,9 +1,9 @@
 package com.kennycason.kumo.placement;
 
-import com.kennycason.kumo.Word;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import com.kennycason.kumo.Word;
 
 /**
  * Created by kenny on 2/21/16.

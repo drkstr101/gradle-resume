@@ -1,5 +1,25 @@
 package com.kennycason.kumo.nlp;
 
+import static java.util.stream.Collectors.reducing;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.apache.commons.io.IOUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import com.kennycason.kumo.WordFrequency;
 import com.kennycason.kumo.nlp.filter.CompositeFilter;
 import com.kennycason.kumo.nlp.filter.Filter;
@@ -11,19 +31,6 @@ import com.kennycason.kumo.nlp.normalize.Normalizer;
 import com.kennycason.kumo.nlp.normalize.TrimToEmptyNormalizer;
 import com.kennycason.kumo.nlp.tokenizer.WhiteSpaceWordTokenizer;
 import com.kennycason.kumo.nlp.tokenizer.WordTokenizer;
-import org.apache.commons.io.IOUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.reducing;
 
 /**
  * Created by kenny on 7/1/14.
@@ -93,7 +100,7 @@ public class FrequencyAnalyzer {
    * load data with auto fill function, if word exist, multiple the words. Else
    * use nothing instead the first input parameter can be InputStream or list of
    * string
-   * 
+   *
    * @param autoFill     decide whether or not to fill the cloud automatically
    * @param autoFillWord is used to define use what word to fill the cloud when
    *                     there is no enough word.
@@ -129,7 +136,7 @@ public class FrequencyAnalyzer {
 
     final Map<String, Integer> cloud = buildWordFrequencies(texts, wordTokenizer);
     int totalLength = 0;
-    for (Map.Entry<String, Integer> entry : cloud.entrySet()) {
+    for (final Map.Entry<String, Integer> entry : cloud.entrySet()) {
       totalLength += entry.getKey().length();
     }
 

@@ -1,8 +1,9 @@
 package com.kennycason.kumo.image;
 
-import com.kennycason.kumo.Word;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
+import com.kennycason.kumo.Word;
 
 /**
  * Created by kenny on 6/29/14.

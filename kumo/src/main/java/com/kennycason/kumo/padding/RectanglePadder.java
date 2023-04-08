@@ -1,9 +1,9 @@
 package com.kennycason.kumo.padding;
 
-import com.kennycason.kumo.Word;
-
-import java.awt.*;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+
+import com.kennycason.kumo.Word;
 
 /**
  * Created by kenny on 7/2/14.

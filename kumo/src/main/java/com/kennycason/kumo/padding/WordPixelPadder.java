@@ -8,8 +8,9 @@ import com.kennycason.kumo.image.CollisionRaster;
  */
 public class WordPixelPadder implements Padder {
 
-  private RectanglePadder rectanglePadder = new RectanglePadder();
+  private final RectanglePadder rectanglePadder = new RectanglePadder();
 
+  @Override
   public void pad(final Word word, final int padding) {
     if (padding <= 0) {
       return;

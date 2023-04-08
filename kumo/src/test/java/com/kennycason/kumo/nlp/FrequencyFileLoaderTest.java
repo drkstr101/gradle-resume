@@ -1,14 +1,15 @@
 package com.kennycason.kumo.nlp;
 
-import com.kennycason.kumo.WordFrequency;
-import com.kennycason.kumo.exception.KumoException;
-import org.apache.commons.io.IOUtils;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import org.apache.commons.io.IOUtils;
+import org.junit.Test;
+
+import com.kennycason.kumo.WordFrequency;
+import com.kennycason.kumo.exception.KumoException;
 
 public class FrequencyFileLoaderTest {
   private static final FrequencyFileLoader FREQUENCY_FILE_LOADER = new FrequencyFileLoader();

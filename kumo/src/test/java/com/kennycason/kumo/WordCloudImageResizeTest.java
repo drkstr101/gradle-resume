@@ -1,5 +1,19 @@
 package com.kennycason.kumo;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.io.IOUtils;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.kennycason.kumo.bg.PixelBoundaryBackground;
 import com.kennycason.kumo.examples.WordCloudITest;
 import com.kennycason.kumo.font.FontWeight;
@@ -7,18 +21,6 @@ import com.kennycason.kumo.font.KumoFont;
 import com.kennycason.kumo.font.scale.SqrtFontScalar;
 import com.kennycason.kumo.nlp.FrequencyAnalyzer;
 import com.kennycason.kumo.palette.ColorPalette;
-import org.apache.commons.io.IOUtils;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class WordCloudImageResizeTest {
   private static final String INPUT_PATH = "backgrounds/whale.png";
@@ -72,22 +74,17 @@ public class WordCloudImageResizeTest {
     frequencyAnalyzer.setWordFrequenciesToReturn(600);
     frequencyAnalyzer.setMinWordLength(5);
     frequencyAnalyzer.setStopWords(loadStopWords());
-    int width = 1500;
-    int height = 1000;
+    final int width = 1500;
+    final int height = 1000;
 
     final List<WordFrequency> wordFrequencies = frequencyAnalyzer.load(getInputStream("text/datarank.txt"), false);
     final Dimension dimension = new Dimension(width, height);
     final WordCloud wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
     wordCloud.setPadding(1);
     wordCloud.setBackgroundColor(Color.WHITE);
-    InputStream inputStream = null;
-    try {
-      inputStream = ImageProcessor.readImage(INPUT_PATH, width, height, DEFAULT_IMAGE_TYPE);
-
+    try (InputStream inputStream = ImageProcessor.readImage(INPUT_PATH, width, height, DEFAULT_IMAGE_TYPE)) {
       wordCloud.setBackground(new PixelBoundaryBackground(inputStream));
 
-    } finally {
-      inputStream.close();
     }
 
     wordCloud.setKumoFont(new KumoFont(DEFAULT_FONT, FontWeight.PLAIN));

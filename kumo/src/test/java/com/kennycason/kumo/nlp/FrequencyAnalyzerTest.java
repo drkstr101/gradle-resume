@@ -1,8 +1,7 @@
 package com.kennycason.kumo.nlp;
 
-import com.kennycason.kumo.WordFrequency;
-import com.kennycason.kumo.nlp.filter.Filter;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -11,8 +10,10 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import org.junit.Test;
+
+import com.kennycason.kumo.WordFrequency;
+import com.kennycason.kumo.nlp.filter.Filter;
 
 public class FrequencyAnalyzerTest {
 

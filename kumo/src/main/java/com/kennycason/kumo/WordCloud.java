@@ -1,5 +1,27 @@
 package com.kennycason.kumo;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.imageio.ImageIO;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.kennycason.kumo.bg.Background;
 import com.kennycason.kumo.bg.RectangleBackground;
 import com.kennycason.kumo.collide.RectanglePixelCollidable;
@@ -21,17 +43,6 @@ import com.kennycason.kumo.placement.RTreeWordPlacer;
 import com.kennycason.kumo.placement.RectangleWordPlacer;
 import com.kennycason.kumo.wordstart.RandomWordStart;
 import com.kennycason.kumo.wordstart.WordStartStrategy;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.*;
-import java.util.List;
 
 /**
  * Created by kenny on 6/29/14.
@@ -182,7 +193,7 @@ public class WordCloud {
   /**
    * try to place in center, build out in a spiral trying to place words for N
    * steps
-   * 
+   *
    * @param word  the word being placed
    * @param start the place to start trying to place the word
    */
@@ -224,20 +235,17 @@ public class WordCloud {
     final Dimension dimensionOfWord = word.getDimension();
 
     // are we inside the background?
-    if (position.y < 0 || position.y + dimensionOfWord.height > dimension.height) {
-      return false;
-    } else if (position.x < 0 || position.x + dimensionOfWord.width > dimension.width) {
+    if (position.y < 0 || position.y + dimensionOfWord.height > dimension.height || position.x < 0
+        || position.x + dimensionOfWord.width > dimension.width) {
       return false;
     }
 
-    switch (collisionMode) {
-    case RECTANGLE:
-      return !backgroundCollidable.collide(word) // is there a collision with the background shape?
-          && wordPlacer.place(word); // is there a collision with the existing words?
-    case PIXEL_PERFECT:
-      return !backgroundCollidable.collide(word); // is there a collision with the background shape?
-    }
-    return false;
+    return switch (collisionMode) {
+      case RECTANGLE -> !backgroundCollidable.collide(word) // is there a collision with the background shape?
+          && wordPlacer.place(word); // is there a collision with the background shape? // is there a collision with
+                                     // the existing words?
+      case PIXEL_PERFECT -> !backgroundCollidable.collide(word); // is there a collision with the background shape?
+    };
   }
 
   protected List<Word> buildWords(final List<WordFrequency> wordFrequencies, final ColorPalette colorPalette) {
@@ -284,23 +292,17 @@ public class WordCloud {
   }
 
   private static Padder derivePadder(final CollisionMode collisionMode) {
-    switch (collisionMode) {
-    case PIXEL_PERFECT:
-      return new WordPixelPadder();
-    case RECTANGLE:
-      return new RectanglePadder();
-    }
-    throw new IllegalArgumentException("CollisionMode can not be null");
+    return switch (collisionMode) {
+      case PIXEL_PERFECT -> new WordPixelPadder();
+      case RECTANGLE -> new RectanglePadder();
+    };
   }
 
   private static CollisionChecker deriveCollisionChecker(final CollisionMode collisionMode) {
-    switch (collisionMode) {
-    case PIXEL_PERFECT:
-      return new RectanglePixelCollisionChecker();
-    case RECTANGLE:
-      return new RectangleCollisionChecker();
-    }
-    throw new IllegalArgumentException("CollisionMode can not be null");
+    return switch (collisionMode) {
+      case PIXEL_PERFECT -> new RectanglePixelCollisionChecker();
+      case RECTANGLE -> new RectangleCollisionChecker();
+    };
   }
 
   public void setBackgroundColor(final Color backgroundColor) {

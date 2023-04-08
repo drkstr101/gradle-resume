@@ -10,7 +10,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
 import javax.imageio.ImageIO;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,7 +28,7 @@ public class SpiralTest {
     // red pixels -> only returned by the old implementation
     // blue pixels -> only returned by the new implementation
     // pink pixels -> returned by the old and the new implementation
-    boolean debug = false;
+    final boolean debug = false;
 
     final int white = 0;
     final int red = 0xFFFF0000;
@@ -34,21 +36,21 @@ public class SpiralTest {
     final int pink = red | blue;
 
     // we seed to get the same numbers on each run
-    Random random = new Random(42);
+    final Random random = new Random(42);
 
     for (int i = 0; i < 20; i++) {
-      Dimension dimension = new Dimension(100 + random.nextInt(900), 100 + random.nextInt(900));
+      final Dimension dimension = new Dimension(100 + random.nextInt(900), 100 + random.nextInt(900));
 
       for (int j = 0; j < 20; j++) {
-        Point start = new Point(random.nextInt(dimension.width), random.nextInt(dimension.height));
+        final Point start = new Point(random.nextInt(dimension.width), random.nextInt(dimension.height));
 
-        List<Point> original = originalSpiral(dimension, start, dimension.width);
-        List<Point> optimized = originalSpiral(dimension, start, WordCloud.computeRadius(dimension, start));
+        final List<Point> original = originalSpiral(dimension, start, dimension.width);
+        final List<Point> optimized = originalSpiral(dimension, start, WordCloud.computeRadius(dimension, start));
 
-        BufferedImage img = new BufferedImage(dimension.width, dimension.height, BufferedImage.TYPE_4BYTE_ABGR);
+        final BufferedImage img = new BufferedImage(dimension.width, dimension.height, BufferedImage.TYPE_4BYTE_ABGR);
 
-        original.forEach((p) -> img.setRGB(p.x, p.y, red));
-        optimized.forEach((p) -> {
+        original.forEach(p -> img.setRGB(p.x, p.y, red));
+        optimized.forEach(p -> {
           if (img.getRGB(p.x, p.y) != 0) {
             img.setRGB(p.x, p.y, pink);
           } else {
@@ -60,7 +62,7 @@ public class SpiralTest {
 
         for (int y = 0; !next && y < dimension.height; y++) {
           for (int x = 0; !next && x < dimension.width; x++) {
-            int rgb = img.getRGB(x, y);
+            final int rgb = img.getRGB(x, y);
 
             if (rgb == red) {
               ImageIO.write(img, "png", new File("output/failed_spiral_test.png"));
@@ -78,16 +80,16 @@ public class SpiralTest {
   @Test
   public void noIdenticalPoints() {
     // we seed to get the same numbers on each run
-    Random random = new Random(42);
+    final Random random = new Random(42);
 
     for (int i = 0; i < 20; i++) {
-      Dimension dimension = new Dimension(100 + random.nextInt(900), 100 + random.nextInt(900));
+      final Dimension dimension = new Dimension(100 + random.nextInt(900), 100 + random.nextInt(900));
 
       for (int j = 0; j < 20; j++) {
-        Point start = new Point(random.nextInt(dimension.width), random.nextInt(dimension.height));
+        final Point start = new Point(random.nextInt(dimension.width), random.nextInt(dimension.height));
 
-        List<Point> points = optimizedSpiral(dimension, start);
-        Set<Point> unique = new HashSet<>(points);
+        final List<Point> points = optimizedSpiral(dimension, start);
+        final Set<Point> unique = new HashSet<>(points);
 
         Assert.assertEquals("no duplicate points", points.size(), unique.size());
       }
@@ -95,15 +97,12 @@ public class SpiralTest {
   }
 
   private List<Point> originalSpiral(Dimension dimension, Point start, int maxRadius) {
-    List<Point> points = new ArrayList<>();
-    Point position = new Point();
+    final List<Point> points = new ArrayList<>();
+    final Point position = new Point();
 
     for (int r = 0; r < maxRadius; r += 2) {
       for (int x = -r; x <= r; x++) {
-        if (start.x + x < 0) {
-          continue;
-        }
-        if (start.x + x >= dimension.width) {
+        if ((start.x + x < 0) || (start.x + x >= dimension.width)) {
           continue;
         }
 
@@ -130,8 +129,8 @@ public class SpiralTest {
   private List<Point> optimizedSpiral(Dimension dimension, Point start) {
     final int maxRadius = WordCloud.computeRadius(dimension, start);
 
-    List<Point> points = new ArrayList<>();
-    Point position = new Point();
+    final List<Point> points = new ArrayList<>();
+    final Point position = new Point();
 
     for (int r = 0; r < maxRadius; r += 2) {
       for (int x = Math.max(-start.x, -r); x <= Math.min(r, dimension.width - start.x - 1); x++) {

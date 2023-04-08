@@ -1,14 +1,19 @@
 package com.kennycason.kumo;
 
-import com.kennycason.kumo.collide.checkers.CollisionChecker;
-import com.kennycason.kumo.collide.Collidable;
-import com.kennycason.kumo.image.CollisionRaster;
-import com.kennycason.kumo.image.ImageRotation;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.kennycason.kumo.collide.Collidable;
+import com.kennycason.kumo.collide.checkers.CollisionChecker;
+import com.kennycason.kumo.image.CollisionRaster;
+import com.kennycason.kumo.image.ImageRotation;
 
 /**
  * Created by kenny on 6/29/14.
@@ -45,7 +50,7 @@ public class Word implements Collidable {
     // get the height of a line of text in this font and render context
     final int height = fontMetrics.getHeight();
 
-    BufferedImage rendered = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+    final BufferedImage rendered = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
     final Graphics2D gOfRendered = (Graphics2D) rendered.getGraphics();
 
@@ -76,10 +81,12 @@ public class Word implements Collidable {
     return theta;
   }
 
+  @Override
   public Point getPosition() {
     return position;
   }
 
+  @Override
   public Dimension getDimension() {
     return collisionRaster.getDimension();
   }
@@ -99,7 +106,7 @@ public class Word implements Collidable {
   }
 
   public static RenderingHints getRenderingHints() {
-    Map<RenderingHints.Key, Object> hints = new HashMap<>();
+    final Map<RenderingHints.Key, Object> hints = new HashMap<>();
     hints.put(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
     hints.put(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     hints.put(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);

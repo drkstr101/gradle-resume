@@ -5,6 +5,7 @@ import com.github.davidmoten.rtree.RTree;
 import com.github.davidmoten.rtree.geometry.Geometries;
 import com.github.davidmoten.rtree.geometry.Rectangle;
 import com.kennycason.kumo.Word;
+
 import rx.Observable;
 
 /**

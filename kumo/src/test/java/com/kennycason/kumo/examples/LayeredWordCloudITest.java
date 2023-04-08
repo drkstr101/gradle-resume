@@ -1,5 +1,19 @@
 package com.kennycason.kumo.examples;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.io.IOUtils;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.kennycason.kumo.CollisionMode;
 import com.kennycason.kumo.LayeredWordCloud;
 import com.kennycason.kumo.WordFrequency;
@@ -9,18 +23,6 @@ import com.kennycason.kumo.font.KumoFont;
 import com.kennycason.kumo.font.scale.SqrtFontScalar;
 import com.kennycason.kumo.nlp.FrequencyAnalyzer;
 import com.kennycason.kumo.palette.ColorPalette;
-import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.junit.Test;
-
-import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by kenny on 7/5/14.
@@ -160,7 +162,7 @@ public class LayeredWordCloudITest {
     try {
       final List<String> lines = IOUtils.readLines(getInputStream("text/stop_words.txt"));
       return new HashSet<>(lines);
-    } catch (IOException e) {
+    } catch (final IOException e) {
       LOGGER.error(e.getMessage(), e);
     }
     return Collections.emptySet();

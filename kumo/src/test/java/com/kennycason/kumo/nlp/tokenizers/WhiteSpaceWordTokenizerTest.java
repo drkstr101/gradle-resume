@@ -1,12 +1,13 @@
 package com.kennycason.kumo.nlp.tokenizers;
 
-import com.kennycason.kumo.nlp.tokenizer.WhiteSpaceWordTokenizer;
-import com.kennycason.kumo.nlp.tokenizer.WordTokenizer;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+import com.kennycason.kumo.nlp.tokenizer.WhiteSpaceWordTokenizer;
+import com.kennycason.kumo.nlp.tokenizer.WordTokenizer;
 
 /**
  * Created by kenny on 2/22/16.

@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * A LinearGradient ColorPalette
- * 
+ *
  * @author &#64;wolfposd
  */
 public class LinearGradientColorPalette extends ColorPalette {
@@ -23,7 +23,7 @@ public class LinearGradientColorPalette extends ColorPalette {
    * <code>
    * new LinearGradientColorPalette(Color.RED, 18, Color.Blue)
    * </code>
-   * 
+   *
    * @param color1        start color
    * @param color2        end color
    * @param gradientSteps specifies the amount of colors for this gradient between
@@ -36,7 +36,7 @@ public class LinearGradientColorPalette extends ColorPalette {
   /**
    * Creates a ColorPalette using a linear gradient between the three colors
    * specified
-   * 
+   *
    * @param color1               start color
    * @param color2               middle color
    * @param color3               end color
@@ -66,7 +66,7 @@ public class LinearGradientColorPalette extends ColorPalette {
 
   /**
    * Creates a linear Gradient between two colors
-   * 
+   *
    * @param color1        start color
    * @param color2        end color
    * @param gradientSteps specifies the amount of colors in this gradient between
@@ -80,7 +80,7 @@ public class LinearGradientColorPalette extends ColorPalette {
     colors.add(color1);
 
     for (int i = 1; i < gradientSteps; i++) {
-      float ratio = (float) i / (float) gradientSteps;
+      final float ratio = (float) i / (float) gradientSteps;
 
       final float red = color2.getRed() * ratio + color1.getRed() * (1 - ratio);
       final float green = color2.getGreen() * ratio + color1.getGreen() * (1 - ratio);

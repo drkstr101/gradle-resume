@@ -1,10 +1,10 @@
 package com.kennycason.kumo.palette;
 
-import org.junit.Test;
-
-import java.awt.*;
-
 import static org.junit.Assert.assertEquals;
+
+import java.awt.Color;
+
+import org.junit.Test;
 
 /**
  * Created by kenny on 2/20/16.

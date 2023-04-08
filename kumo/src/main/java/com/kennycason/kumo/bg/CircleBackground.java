@@ -1,9 +1,10 @@
 package com.kennycason.kumo.bg;
 
+import java.awt.Dimension;
+import java.awt.Point;
+
 import com.kennycason.kumo.collide.RectanglePixelCollidable;
 import com.kennycason.kumo.image.CollisionRaster;
-
-import java.awt.*;
 
 /**
  * Created by kenny on 6/30/14.
@@ -21,8 +22,8 @@ public class CircleBackground implements Background {
 
   @Override
   public void mask(RectanglePixelCollidable background) {
-    Dimension dimensionOfBackground = background.getDimension();
-    CollisionRaster rasterOfBackground = background.getCollisionRaster();
+    final Dimension dimensionOfBackground = background.getDimension();
+    final CollisionRaster rasterOfBackground = background.getCollisionRaster();
 
     for (int y = 0; y < dimensionOfBackground.height; y++) {
       for (int x = 0; x < dimensionOfBackground.width; x++) {

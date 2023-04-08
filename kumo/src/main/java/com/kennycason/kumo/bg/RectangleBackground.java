@@ -1,13 +1,14 @@
 package com.kennycason.kumo.bg;
 
+import java.awt.Dimension;
+import java.awt.Point;
+
 import com.kennycason.kumo.collide.RectanglePixelCollidable;
 import com.kennycason.kumo.image.CollisionRaster;
 
-import java.awt.*;
-
 /**
  * A Background Collision Mode in the shape of a rectangle
- * 
+ *
  * @author kenny, wolfposd
  * @version 2015.11.26
  */
@@ -20,7 +21,7 @@ public class RectangleBackground implements Background {
 
   /**
    * Creates a rectangle background starting at (0|0) with specified width/height
-   * 
+   *
    * @param dimension dimension of background
    */
   public RectangleBackground(final Dimension dimension) {
@@ -30,7 +31,7 @@ public class RectangleBackground implements Background {
   /**
    * Creates a rectangle background using {@link Point} and {@link Dimension} for
    * starting points and width/height
-   * 
+   *
    * @param position  the point where the rectangle lives on screen
    * @param dimension dimension of background
    */
@@ -41,16 +42,16 @@ public class RectangleBackground implements Background {
 
   @Override
   public void mask(RectanglePixelCollidable background) {
-    Dimension dimensionOfShape = dimension;
+    final Dimension dimensionOfShape = dimension;
 
-    int minY = Math.max(position.y, 0);
-    int minX = Math.max(position.x, 0);
+    final int minY = Math.max(position.y, 0);
+    final int minX = Math.max(position.x, 0);
 
-    int maxY = dimensionOfShape.height + position.y - 1;
-    int maxX = dimensionOfShape.width + position.x - 1;
+    final int maxY = dimensionOfShape.height + position.y - 1;
+    final int maxX = dimensionOfShape.width + position.x - 1;
 
-    Dimension dimensionOfBackground = background.getDimension();
-    CollisionRaster rasterOfBackground = background.getCollisionRaster();
+    final Dimension dimensionOfBackground = background.getDimension();
+    final CollisionRaster rasterOfBackground = background.getCollisionRaster();
 
     for (int y = 0; y < dimensionOfBackground.height; y++) {
       for (int x = 0; x < dimensionOfBackground.width; x++) {

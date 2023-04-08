@@ -1,5 +1,17 @@
 package com.kennycason.kumo.examples;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+
 import com.kennycason.kumo.CollisionMode;
 import com.kennycason.kumo.WordCloud;
 import com.kennycason.kumo.WordFrequency;
@@ -8,12 +20,6 @@ import com.kennycason.kumo.font.scale.LinearFontScalar;
 import com.kennycason.kumo.nlp.FrequencyAnalyzer;
 import com.kennycason.kumo.palette.ColorPalette;
 
-import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-
 /**
  * Created by kenny on 2/21/16.
  *
@@ -21,11 +27,15 @@ import java.util.List;
  */
 public class JPanelDemo extends JPanel {
 
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private final WordCloud wordCloud;
 
   public static void main(String[] args) throws IOException {
     final JFrame frame = new JFrame("JPanel WordCloud");
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.add(new JPanelDemo());
     frame.pack();
     frame.setLocationRelativeTo(null);

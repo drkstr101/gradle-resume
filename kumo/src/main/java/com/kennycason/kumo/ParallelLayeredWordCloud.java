@@ -1,18 +1,23 @@
 package com.kennycason.kumo;
 
-import com.kennycason.kumo.exception.KumoException;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.*;
+import com.kennycason.kumo.exception.KumoException;
 
 /**
  * A LayeredWordCloud which can process each layer in its own Thread, thus
  * minimizing processing time.
- * 
+ *
  * @author &#64;wolfposd
  */
 public class ParallelLayeredWordCloud extends LayeredWordCloud {
@@ -31,7 +36,7 @@ public class ParallelLayeredWordCloud extends LayeredWordCloud {
    * constructs the wordcloud specified by layer using the given
    * wordfrequencies.<br>
    * This is a non-blocking call.
-   * 
+   *
    * @param layer           Wordcloud Layer
    * @param wordFrequencies the WordFrequencies to use as input
    */
@@ -48,7 +53,7 @@ public class ParallelLayeredWordCloud extends LayeredWordCloud {
   /**
    * Writes the wordcloud to an imagefile.<br>
    * This is a blocking call.
-   * 
+   *
    * @param outputFileName some file like "test.png"
    */
   @Override
@@ -60,7 +65,7 @@ public class ParallelLayeredWordCloud extends LayeredWordCloud {
    * Writes the wordcloud to an imagefile.<br>
    * Terminates the executor afterwards. See
    * {@link #writeToFile(String, boolean, boolean)} for a non-terminating call
-   * 
+   *
    * @param outputFileName some file like "test.png"
    * @param blockThread    should the current thread be blocked
    */
@@ -70,7 +75,7 @@ public class ParallelLayeredWordCloud extends LayeredWordCloud {
 
   /**
    * Writes the wordcloud to an imagefile.
-   * 
+   *
    * @param outputFileName   some file like "test.png"
    * @param blockThread      should the current thread be blocked
    * @param shutdownExecutor should the executor be shutdown afterwards. if
@@ -119,7 +124,7 @@ public class ParallelLayeredWordCloud extends LayeredWordCloud {
     executorservice.shutdown();
     try {
       executorservice.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
-    } catch (InterruptedException e) {
+    } catch (final InterruptedException e) {
       throw new KumoException("Executor awaitTermination was interrupted, consider manual termination", e);
     }
   }

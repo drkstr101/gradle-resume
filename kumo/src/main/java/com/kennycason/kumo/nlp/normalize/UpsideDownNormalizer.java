@@ -5,10 +5,14 @@ package com.kennycason.kumo.nlp.normalize;
  */
 public class UpsideDownNormalizer implements Normalizer {
 
-  private static final String normal = "abcdefghijklmnopqrstuvwxyz_,;.?!/\\'" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-      + "0123456789";
-  private static final String split = "ɐqɔpǝɟbɥıظʞןɯuodbɹsʇnʌʍxʎz‾'؛˙¿¡/\\," + "∀qϽᗡƎℲƃHIſʞ˥WNOԀὉᴚS⊥∩ΛMXʎZ"
-      + "0ƖᄅƐㄣϛ9ㄥ86";
+  private static final String normal = """
+      abcdefghijklmnopqrstuvwxyz_,;.?!/\\'\
+      ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+      0123456789""";
+  private static final String split = """
+      ɐqɔpǝɟbɥıظʞןɯuodbɹsʇnʌʍxʎz‾'؛˙¿¡/\\,\
+      ∀qϽᗡƎℲƃHIſʞ˥WNOԀὉᴚS⊥∩ΛMXʎZ\
+      0ƖᄅƐㄣϛ9ㄥ86""";
 
   @Override
   public String apply(final String text) {

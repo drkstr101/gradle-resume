@@ -1,12 +1,14 @@
 package com.kennycason.kumo;
 
-import com.kennycason.kumo.palette.ColorPalette;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import com.kennycason.kumo.palette.ColorPalette;
 
 /**
  * Created by kenny on 6/29/14.
@@ -75,16 +77,14 @@ public class PolarWordCloud extends WordCloud {
   }
 
   private Point getStartPosition(final Point pole) {
-    switch (polarBlendMode) {
-    case BLUR:
-      final int blurX = dimension.width / 2;
-      final int blurY = dimension.height / 2;
-      return new Point(pole.x + -blurX + RANDOM.nextInt(blurX * 2), pole.y + -blurY + RANDOM.nextInt(blurY * 2));
-
-    case EVEN:
-      return pole;
-    }
-    throw new IllegalArgumentException("PolarBlendMode must not be null");
+    return switch (polarBlendMode) {
+      case BLUR -> {
+        final int blurX = dimension.width / 2;
+        final int blurY = dimension.height / 2;
+        yield new Point(pole.x + -blurX + RANDOM.nextInt(blurX * 2), pole.y + -blurY + RANDOM.nextInt(blurY * 2));
+      }
+      case EVEN -> pole;
+    };
   }
 
   private Point[] getRandomPoles() {

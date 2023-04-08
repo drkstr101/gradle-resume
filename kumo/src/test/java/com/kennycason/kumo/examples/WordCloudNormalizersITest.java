@@ -1,5 +1,14 @@
 package com.kennycason.kumo.examples;
 
+import java.awt.Dimension;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.kennycason.kumo.CollisionMode;
 import com.kennycason.kumo.WordCloud;
 import com.kennycason.kumo.WordFrequency;
@@ -10,14 +19,6 @@ import com.kennycason.kumo.nlp.normalize.BubbleTextNormalizer;
 import com.kennycason.kumo.nlp.normalize.StringToHexNormalizer;
 import com.kennycason.kumo.nlp.normalize.UpperCaseNormalizer;
 import com.kennycason.kumo.nlp.normalize.UpsideDownNormalizer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.junit.Test;
-
-import java.awt.*;
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
 
 /**
  * Created by kenny on 6/29/14.

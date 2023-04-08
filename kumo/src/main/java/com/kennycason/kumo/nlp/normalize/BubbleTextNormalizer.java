@@ -2,7 +2,7 @@ package com.kennycason.kumo.nlp.normalize;
 
 /**
  * Replaces the characters a-zA-Z with their bubble pendants ⓐ-ⓩⒶ-Ⓩ
- * 
+ *
  * @author &#64;wolfposd
  *
  */

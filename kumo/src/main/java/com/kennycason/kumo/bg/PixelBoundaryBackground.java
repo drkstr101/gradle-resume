@@ -1,20 +1,22 @@
 package com.kennycason.kumo.bg;
 
-import com.kennycason.kumo.collide.RectanglePixelCollidable;
-import com.kennycason.kumo.image.CollisionRaster;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.imageio.ImageIO;
+
+import com.kennycason.kumo.collide.RectanglePixelCollidable;
+import com.kennycason.kumo.image.CollisionRaster;
+
 /**
  * Class creates a Background Mode based on the transparent Pixel-boundaries of
  * a loaded image
- * 
+ *
  * @author kenny
  * @version 2014.06.30
  */

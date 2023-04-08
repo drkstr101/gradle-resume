@@ -1,6 +1,7 @@
 package com.kennycason.kumo.image;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.BitSet;
 
@@ -40,7 +41,8 @@ public class CollisionRaster {
   private int computeIndex(final int x, final int y) {
     if (x < 0 || x >= dimension.width) {
       throw new IllegalArgumentException("x is out of bounds");
-    } else if (y < 0 || y >= dimension.height) {
+    }
+    if (y < 0 || y >= dimension.height) {
       throw new IllegalArgumentException("y is out of bounds");
     }
 
@@ -76,14 +78,13 @@ public class CollisionRaster {
       throw new IllegalArgumentException("maxX is out of bounds");
     }
 
-    int idx = computeIndex(minX, y);
-    int set = data.nextSetBit(idx);
+    final int idx = computeIndex(minX, y);
+    final int set = data.nextSetBit(idx);
 
     if (set != -1 && set < idx + maxX - minX) {
       return (set - idx) + minX;
-    } else {
-      return -1;
     }
+    return -1;
   }
 
   public boolean isTransparent(final int x, final int y) {

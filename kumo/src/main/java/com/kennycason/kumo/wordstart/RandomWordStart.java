@@ -1,13 +1,14 @@
 package com.kennycason.kumo.wordstart;
 
-import com.kennycason.kumo.Word;
-
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.util.Random;
+
+import com.kennycason.kumo.Word;
 
 /**
  * Always returns a random point in the image as starting point
- * 
+ *
  * @author &#64;wolfposd
  */
 public class RandomWordStart implements WordStartStrategy {

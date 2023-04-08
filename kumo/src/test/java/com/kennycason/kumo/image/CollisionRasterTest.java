@@ -1,16 +1,18 @@
 package com.kennycason.kumo.image;
 
-import com.kennycason.kumo.collide.Collidable;
-import com.kennycason.kumo.collide.checkers.CollisionChecker;
-import com.kennycason.kumo.collide.checkers.RectanglePixelCollisionChecker;
-import org.junit.Test;
-
-import java.awt.*;
-import org.junit.Assert;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.awt.Dimension;
+import java.awt.Point;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.kennycason.kumo.collide.Collidable;
+import com.kennycason.kumo.collide.checkers.CollisionChecker;
+import com.kennycason.kumo.collide.checkers.RectanglePixelCollisionChecker;
 
 /**
  * Created by kenny on 7/4/14.
@@ -79,7 +81,7 @@ public class CollisionRasterTest {
 
   @Test
   public void collisionsAreFound() {
-    CollisionChecker checker = new RectanglePixelCollisionChecker();
+    final CollisionChecker checker = new RectanglePixelCollisionChecker();
 
     final Dimension dimension = new Dimension(90, 60);
     final CollisionRaster collisionRasterA = new CollisionRaster(dimension);

@@ -1,15 +1,16 @@
 package com.kennycason.kumo.examples;
 
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import org.junit.Test;
+
 import com.kennycason.kumo.CollisionMode;
 import com.kennycason.kumo.WordCloud;
 import com.kennycason.kumo.WordFrequency;
 import com.kennycason.kumo.font.KumoFont;
-import org.junit.Test;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by kenny on 6/14/16.

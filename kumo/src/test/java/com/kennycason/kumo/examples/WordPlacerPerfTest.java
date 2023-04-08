@@ -1,19 +1,20 @@
 package com.kennycason.kumo.examples;
 
+import java.awt.Dimension;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.kennycason.kumo.CollisionMode;
 import com.kennycason.kumo.WordCloud;
 import com.kennycason.kumo.WordFrequency;
 import com.kennycason.kumo.nlp.FrequencyAnalyzer;
 import com.kennycason.kumo.placement.LinearWordPlacer;
 import com.kennycason.kumo.placement.RTreeWordPlacer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.junit.Test;
-
-import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 /**
  * Created by kenny on 6/29/14.
@@ -24,13 +25,13 @@ import java.util.List;
  *
  * 100 frequencies (average) =============== linear 1090ms to build rtree 120ms
  * to build
- * 
+ *
  * 500 frequencies (average) =============== linear 1315ms to build rtree 372ms
  * to build
- * 
+ *
  * 800 frequencies (average) ============== linear 2169ms to build rtree 1626ms
  * to build
- * 
+ *
  * 1000 frequencies (average) ============== linear 19596ms to build rtree
  * 16798ms to build
  */

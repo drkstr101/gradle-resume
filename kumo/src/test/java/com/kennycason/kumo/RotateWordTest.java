@@ -1,16 +1,20 @@
 package com.kennycason.kumo;
 
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.runners.Parameterized;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.runners.Parameterized;
 
 /**
  *
@@ -21,8 +25,8 @@ public class RotateWordTest {
 
   @Parameterized.Parameters
   public static Iterable<Object[]> data() {
-    List<Object[]> params = new ArrayList<>();
-    String text = "rotating text is great!!";
+    final List<Object[]> params = new ArrayList<>();
+    final String text = "rotating text is great!!";
 
     for (int i = 20; i < 100; i += 10) {
       params.add(new Object[] { new Font("Arial", 0, i), text.toLowerCase() });
@@ -43,20 +47,20 @@ public class RotateWordTest {
 
   @Ignore
   public void checkRotatedTextIsNotCropped() throws IOException {
-    BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_4BYTE_ABGR);
-    Graphics2D graphics = image.createGraphics();
+    final BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_4BYTE_ABGR);
+    final Graphics2D graphics = image.createGraphics();
 
     // set the rendering hint here to ensure the font metrics are correct
     graphics.setRenderingHints(Word.getRenderingHints());
-    FontMetrics fontMetrics = graphics.getFontMetrics(_font);
+    final FontMetrics fontMetrics = graphics.getFontMetrics(_font);
 
     for (int angle = 0; angle < 360; angle += 5) {
-      Word word = new Word(_text, Color.red, fontMetrics, null, Math.toRadians(angle));
+      final Word word = new Word(_text, Color.red, fontMetrics, null, Math.toRadians(angle));
 
-      BufferedImage rendered = word.getBufferedImage();
+      final BufferedImage rendered = word.getBufferedImage();
 
-      int width = rendered.getWidth();
-      int height = rendered.getHeight();
+      final int width = rendered.getWidth();
+      final int height = rendered.getHeight();
 
       try {
         for (int y = 0; y < height; y++) {
@@ -69,8 +73,8 @@ public class RotateWordTest {
           Assert.assertTrue("text doesn't touch the top line", nearlyTransparent(rendered.getRGB(x, 0)));
           Assert.assertTrue("text doesn't touch the bottom line", nearlyTransparent(rendered.getRGB(x, height - 1)));
         }
-      } catch (AssertionError e) {
-        File file = new File("output/FailedRotateWordTest_" + System.currentTimeMillis() + ".png");
+      } catch (final AssertionError e) {
+        final File file = new File("output/FailedRotateWordTest_" + System.currentTimeMillis() + ".png");
         ImageIO.write(rendered, "png", file);
 
         throw e;

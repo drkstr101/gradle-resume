@@ -1,5 +1,20 @@
 package com.kennycason.kumo;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.imageio.ImageIO;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.kennycason.kumo.bg.Background;
 import com.kennycason.kumo.exception.KumoException;
 import com.kennycason.kumo.font.KumoFont;
@@ -8,17 +23,6 @@ import com.kennycason.kumo.image.AngleGenerator;
 import com.kennycason.kumo.palette.ColorPalette;
 import com.kennycason.kumo.placement.RectangleWordPlacer;
 import com.kennycason.kumo.wordstart.WordStartStrategy;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by kenny on 7/5/14.

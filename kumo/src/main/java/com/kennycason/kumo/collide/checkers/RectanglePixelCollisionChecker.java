@@ -1,9 +1,9 @@
 package com.kennycason.kumo.collide.checkers;
 
+import java.awt.Point;
+
 import com.kennycason.kumo.collide.Collidable;
 import com.kennycason.kumo.image.CollisionRaster;
-
-import java.awt.*;
 
 /**
  * Created by kenny on 7/1/14.

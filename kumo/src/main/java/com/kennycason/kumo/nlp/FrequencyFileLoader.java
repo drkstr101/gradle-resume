@@ -1,10 +1,6 @@
 package com.kennycason.kumo.nlp;
 
-import com.kennycason.kumo.WordFrequency;
-import com.kennycason.kumo.exception.KumoException;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
+import static org.apache.commons.lang3.StringUtils.trimToNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +9,12 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.apache.commons.lang3.StringUtils.trimToNull;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+
+import com.kennycason.kumo.WordFrequency;
+import com.kennycason.kumo.exception.KumoException;
 
 /**
  * The purpose of this file is to load already computed frequency - word pairs
