@@ -13,16 +13,14 @@ import java.awt.*;
  */
 public interface WordStartStrategy {
 
-    /**
-     * Calculate a starting point for the given word. The returned Point is not
-     * necessarily the actual point on the image, rather a first try.
-     * 
-     * @param dimension
-     *            width/height of the image
-     * @param word
-     *            the word to be placed
-     * @return X/Y starting position
-     */
-    Point getStartingPoint(Dimension dimension, Word word);
+  /**
+   * Calculate a starting point for the given word. The returned Point is not
+   * necessarily the actual point on the image, rather a first try.
+   * 
+   * @param dimension width/height of the image
+   * @param word      the word to be placed
+   * @return X/Y starting position
+   */
+  Point getStartingPoint(Dimension dimension, Word word);
 
 }

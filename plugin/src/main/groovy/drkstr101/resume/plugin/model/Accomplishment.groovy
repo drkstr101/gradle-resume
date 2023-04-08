@@ -11,11 +11,11 @@ import groovy.transform.Canonical
  */
 @Canonical
 class Accomplishment {
-	String name
-	AccomplishmentType type
-	Calendar startDate
-	Calendar endDate
-	String description
-	Collection<Reference> references = []
-	Collection<Skill> skills = []
+  String name
+  AccomplishmentType type
+  Calendar startDate
+  Calendar endDate
+  String description
+  Collection<Reference> references = []
+  Collection<Skill> skills = []
 }

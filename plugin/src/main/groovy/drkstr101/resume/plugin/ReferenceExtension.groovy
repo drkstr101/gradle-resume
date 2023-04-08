@@ -10,20 +10,21 @@ import org.gradle.api.tasks.Optional
 /**
  * @author Aaron R Miller
  *
- */
-class ReferenceExtension implements Named {
+ */class ReferenceExtension implements Named {
 
-	private final String name
+  private final String name
 
-	@Input
-	String getName() {
-		return name
-	}
+  @Input
+  String getName() {
+    return name
+  }
 
-	@Optional @Input String description
+  @Optional
+  @Input
+  String description
 
-	@Inject
-	ReferenceExtension(String name, ObjectFactory objectFactory) {
-		this.name = name
-	}
+  @Inject
+  ReferenceExtension( String name, ObjectFactory objectFactory) {
+    this.name=name
+  }
 }

@@ -9,16 +9,14 @@ import java.util.Set;
  */
 public class StopWordFilter extends Filter {
 
-    private final Set<String> stopWords = new HashSet<>();
+  private final Set<String> stopWords = new HashSet<>();
 
-    public StopWordFilter(final Collection<String> stopWords) {
-        this.stopWords.addAll(stopWords);
-    }
+  public StopWordFilter(final Collection<String> stopWords) {
+    this.stopWords.addAll(stopWords);
+  }
 
-
-    @Override
-    public boolean test(final String word) {
-       return !this.stopWords.contains(word.toLowerCase());
-    }
+  @Override
+  public boolean test(final String word) {
+    return !this.stopWords.contains(word.toLowerCase());
+  }
 }
-

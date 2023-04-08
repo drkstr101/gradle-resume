@@ -13,13 +13,13 @@ import groovy.transform.Canonical
  */
 @Canonical
 class Skill {
-	String name
-	String label
-	Skill parent
-	Collection<Skill> children = []	
-	
-	Skill rootNode() {
-		if(!parent) return this
-		return parent.rootNode()
-	}
+  String name
+  String label
+  Skill parent
+  Collection<Skill> children = []
+
+  Skill rootNode() {
+    if(!parent) return this
+    return parent.rootNode()
+  }
 }

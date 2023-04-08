@@ -10,35 +10,35 @@ import java.awt.*;
  */
 public class RectanglePixelCollidable implements Collidable {
 
-    private static final RectanglePixelCollisionChecker RECTANGLE_PIXEL_COLLISION_CHECKER = new RectanglePixelCollisionChecker();
+  private static final RectanglePixelCollisionChecker RECTANGLE_PIXEL_COLLISION_CHECKER = new RectanglePixelCollisionChecker();
 
-    private final Point position;
+  private final Point position;
 
-    private final CollisionRaster collisionRaster;
+  private final CollisionRaster collisionRaster;
 
-    public RectanglePixelCollidable(final CollisionRaster collisionRaster, final Point position) {
-        this.collisionRaster = collisionRaster;
-        this.position = position;
-    }
+  public RectanglePixelCollidable(final CollisionRaster collisionRaster, final Point position) {
+    this.collisionRaster = collisionRaster;
+    this.position = position;
+  }
 
-    @Override
-    public boolean collide(final Collidable collidable) {
-        return RECTANGLE_PIXEL_COLLISION_CHECKER.collide(this, collidable);
-    }
+  @Override
+  public boolean collide(final Collidable collidable) {
+    return RECTANGLE_PIXEL_COLLISION_CHECKER.collide(this, collidable);
+  }
 
-    @Override
-    public Point getPosition() {
-        return position;
-    }
+  @Override
+  public Point getPosition() {
+    return position;
+  }
 
-    @Override
-    public Dimension getDimension() {
-        return collisionRaster.getDimension();
-    }
+  @Override
+  public Dimension getDimension() {
+    return collisionRaster.getDimension();
+  }
 
-    @Override
-    public CollisionRaster getCollisionRaster() {
-        return collisionRaster;
-    }
+  @Override
+  public CollisionRaster getCollisionRaster() {
+    return collisionRaster;
+  }
 
 }

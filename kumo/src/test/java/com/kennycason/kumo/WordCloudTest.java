@@ -18,32 +18,30 @@ import static org.junit.Assert.*;
 
 public class WordCloudTest {
 
-    public static final List<WordFrequency> WORD_FREQUENCIES = Arrays.asList(new WordFrequency("apple", 22),
-                                                                             new WordFrequency("baby", 3),
-                                                                             new WordFrequency("back", 15),
-                                                                             new WordFrequency("bear", 9),
-                                                                             new WordFrequency("boy", 26));
+  public static final List<WordFrequency> WORD_FREQUENCIES = Arrays.asList(new WordFrequency("apple", 22),
+      new WordFrequency("baby", 3), new WordFrequency("back", 15), new WordFrequency("bear", 9),
+      new WordFrequency("boy", 26));
 
-    @Test
-    public void testWriteToStreamAsPNG() throws IOException {
-        final Dimension dimension = new Dimension(200, 200);
-        final WordCloud wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
-        wordCloud.build(WORD_FREQUENCIES);
-        wordCloud.setPadding(2);
-        wordCloud.setBackground(new RectangleBackground(dimension));
+  @Test
+  public void testWriteToStreamAsPNG() throws IOException {
+    final Dimension dimension = new Dimension(200, 200);
+    final WordCloud wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
+    wordCloud.build(WORD_FREQUENCIES);
+    wordCloud.setPadding(2);
+    wordCloud.setBackground(new RectangleBackground(dimension));
 
-        final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        wordCloud.writeToStreamAsPNG(byteArrayOutputStream);
+    final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    wordCloud.writeToStreamAsPNG(byteArrayOutputStream);
 
-        final byte[] bytes = byteArrayOutputStream.toByteArray();
-        assertNotEquals(0, bytes.length);
+    final byte[] bytes = byteArrayOutputStream.toByteArray();
+    assertNotEquals(0, bytes.length);
 
-        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
-        final ImageInputStream imageInputStream = ImageIO.createImageInputStream(byteArrayInputStream);
-        final Iterator<ImageReader> imageReaders = ImageIO.getImageReaders(imageInputStream);
-        assertTrue(imageReaders.hasNext());
-        final ImageReader imageReader = imageReaders.next();
-        assertEquals("png", imageReader.getFormatName());
-    }
+    final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+    final ImageInputStream imageInputStream = ImageIO.createImageInputStream(byteArrayInputStream);
+    final Iterator<ImageReader> imageReaders = ImageIO.getImageReaders(imageInputStream);
+    assertTrue(imageReaders.hasNext());
+    final ImageReader imageReader = imageReaders.next();
+    assertEquals("png", imageReader.getFormatName());
+  }
 
 }

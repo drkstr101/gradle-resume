@@ -36,14 +36,14 @@ class RenderSkillCloud extends DefaultTask {
 
   static String displayNameFor(Skill skill) {
     return skill.label ? skill.label :
-                skill.name.split('_').collect({ it.capitalize() }).join(' ')
+        skill.name.split('_').collect({ it.capitalize() }).join(' ')
   }
 
   static List<String> collectCategories(Map<String, Skill> skillsByName) {
     return skillsByName.values()
-                .stream()
-                .filter({ Skill skill -> skill.parent == null })
-                .collect { Skill skill -> skill.name }
+        .stream()
+        .filter({ Skill skill -> skill.parent == null })
+        .collect { Skill skill -> skill.name }
   }
 
   static List<WordFrequency> toWordFrequencies(Resume resume, Map<String, Integer> skillPoints, List<String> categories) {
@@ -51,8 +51,8 @@ class RenderSkillCloud extends DefaultTask {
       def skill = resume.skillsByName.get(key)
       def index = categories.indexOf(skill.rootNode().name)
       return new WordFrequency(displayNameFor(skill), val, index)
-        }).sort({ WordFrequency val -> val.frequency }).reverse()
-    }
+    }).sort({ WordFrequency val -> val.frequency }).reverse()
+  }
 
   static final DEFAULT_IMAGE_WIDTH = 800
 
@@ -72,7 +72,7 @@ class RenderSkillCloud extends DefaultTask {
 
   @Internal SkillPointCalculator _calculator
 
-    @Inject
+  @Inject
   RenderSkillCloud(ObjectFactory objectFactory, ProviderFactory providerFactory, ProjectLayout layout) {
     imageOutputFile = objectFactory.fileProperty()
     imageOutputFile.convention(layout.projectDirectory.file('template/altacv/skillcloud.png'))
@@ -95,7 +95,7 @@ class RenderSkillCloud extends DefaultTask {
     }
   }
 
-    @TaskAction
+  @TaskAction
   void run() {
     final Resume resume = modelProvider.get()
     final Map<String, BigInteger> skillPoints = this.skillPoints.get()
@@ -115,5 +115,4 @@ class RenderSkillCloud extends DefaultTask {
       wordCloud.writeToStreamAsPNG(os)
     }
   }
-
-  }
+}

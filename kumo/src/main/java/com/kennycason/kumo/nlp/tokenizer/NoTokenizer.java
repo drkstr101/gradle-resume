@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class NoTokenizer implements WordTokenizer {
 
-    public List<String> tokenize(final String sentence) {
-        return Collections.singletonList(sentence);
-    }
+  public List<String> tokenize(final String sentence) {
+    return Collections.singletonList(sentence);
+  }
 
 }

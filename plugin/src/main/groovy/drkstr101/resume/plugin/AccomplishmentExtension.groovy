@@ -15,27 +15,27 @@ import drkstr101.resume.plugin.model.AccomplishmentType
  */
 class AccomplishmentExtension implements Named {
 
-	private final String name
+  private final String name
 
-	@Input
-	String getName() {
-		return name
-	}
+  @Input
+  String getName() {
+    return name
+  }
 
-	@Input AccomplishmentType type
+  @Input AccomplishmentType type
 
-	@Optional @Input String description
+  @Optional @Input String description
 
-	@Optional @Input Calendar startDate
+  @Optional @Input Calendar startDate
 
-	@Optional @Input Calendar endDate
+  @Optional @Input Calendar endDate
 
-	@Input Set<String> references = []
-	
-	@Input Set<String> skills = []
+  @Input Set<String> references = []
 
-	@Inject
-	AccomplishmentExtension(String name, ObjectFactory objectFactory) {
-		this.name = name
-	}
+  @Input Set<String> skills = []
+
+  @Inject
+  AccomplishmentExtension(String name, ObjectFactory objectFactory) {
+    this.name = name
+  }
 }

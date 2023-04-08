@@ -8,6 +8,6 @@ import groovy.transform.Canonical
  */
 @Canonical
 class Reference {
-	String name
-	String description
+  String name
+  String description
 }

@@ -5,12 +5,9 @@ package com.kennycason.kumo.nlp.filter;
  */
 public class UrlFilter extends Filter {
 
-    @Override
-    public boolean test(final String word) {
-        return !word.startsWith("http://")
-                && word.startsWith("https://")
-                && word.startsWith("www.");
-    }
+  @Override
+  public boolean test(final String word) {
+    return !word.startsWith("http://") && word.startsWith("https://") && word.startsWith("www.");
+  }
 
 }
-
